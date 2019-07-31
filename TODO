@@ -1,0 +1,15 @@
+Add Login screen
+Add administrative route/component(s)
+
+Implement mechanism/service (redux?) for front-end data/state caching
+
+Create server-side implementation.
+Hook up to a server.
+Create a get Request with the server.
+Create a post with the server.
+Create a delete with the server.
+Create a put with the server.
+
+Time-Component
+Limit Date range (later)
+DONE - Shorten Time string.

@@ -6,10 +6,22 @@ import { AppComponent } from './app.component';
 import { TimeEntryComponent } from './time-entry/time-entry.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
+import { TimeEntryListElementComponent } from './time-entry/time-entry-list-element/time-entry-list-element.component';
+import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 @NgModule({
-  declarations: [AppComponent, TimeEntryComponent],
-  imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, TimepickerModule.forRoot()],
+  declarations: [AppComponent, TimeEntryComponent, TimeEntryListElementComponent],
+  imports: [
+    CommonModule,
+    BrowserModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    TimepickerModule.forRoot(),
+    BrowserAnimationsModule,
+    BsDatepickerModule.forRoot()
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

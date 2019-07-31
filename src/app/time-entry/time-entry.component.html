@@ -1,21 +1,30 @@
 <!-- TODO: Add times component -->
 <div class="container">
   <div class="row">
-    <p class="col">Current Time: {{ currentTime }}</p>
+    <div class="col-xs-12 col-12 col-md-4 form-group"><bs-datepicker-inline [bsValue]="todaysDate"></bs-datepicker-inline></div>
   </div>
   <div class="row">
     <div class="col"><input placeholder="Ticket #" /></div>
-    <button>Add Time Entry at Current Time</button>
-    <div class="col"></div>
-    <div class="col"></div>
+    <!-- TODO: Add Time-Zone field -->
+    <div class="col">
+      <button (click)="addCurrentTimeEntry()">Add time entry for ticket at {{ currentTime | date: 'h:mm:ss a' }}</button>
+    </div>
+  </div>
+  <div class="row">
+    <!-- TODO: Ticket search w/most recent tickets at the top.-->
+    <div class="col"><textarea placeholder="Comments"></textarea></div>
+    <div class="col-sm-4">Start Time<timepicker></timepicker></div>
+    <div class="col-sm-4">End Time<timepicker></timepicker></div>
   </div>
   <!-- TODO: Date -->
-  <div class="col-sm-4">Start Time<timepicker></timepicker></div>
-  <div class="col-sm-4">End Time<timepicker></timepicker></div>
   <button style="margin-right: 5px;" class="btn-primary">Submit</button> <button class="btn-secondary">Clear</button>
-  <div class="row">
-    <div class="col"></div>
-    <button class="col">Clear Ticket Cache</button>
+
+  <div class="row" *ngFor="let timeEntry of timeEntryList">
+    <app-time-entry-list-element
+      [ticketNumber]="timeEntry.ticketNumber"
+      [date]="timeEntry.date"
+      [comments]="timeEntry.comments"
+    ></app-time-entry-list-element>
   </div>
 </div>
 
