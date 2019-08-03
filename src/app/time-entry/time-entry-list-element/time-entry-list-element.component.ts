@@ -1,3 +1,4 @@
+import { TicketTimeEntry, TimeEntryService } from './../time-entry.service';
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
@@ -6,11 +7,15 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./time-entry-list-element.component.scss']
 })
 export class TimeEntryListElementComponent implements OnInit {
-  @Input() ticketNumber: string;
-  @Input() date: Date;
-  @Input() comments: string;
+  public ticketEntry: TicketTimeEntry;
 
-  constructor() {}
+  constructor(private timeEntryService: TimeEntryService) {}
 
-  ngOnInit() {}
+  public getClass(): string {
+    return this.ticketEntry.isStartTime ? 'ticketStartTime' : 'ticketEndTime';
+  }
+
+  ngOnInit() {
+    this.ticketEntry = this.timeEntryService.getCurrentTicket();
+  }
 }

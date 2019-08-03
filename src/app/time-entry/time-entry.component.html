@@ -1,31 +1,37 @@
 <!-- TODO: Add times component -->
 <div class="container">
   <div class="row">
-    <div class="col-xs-12 col-12 col-md-4 form-group"><bs-datepicker-inline [bsValue]="todaysDate"></bs-datepicker-inline></div>
-  </div>
-  <div class="row">
-    <div class="col"><input placeholder="Ticket #" /></div>
-    <!-- TODO: Add Time-Zone field -->
     <div class="col">
-      <button (click)="addCurrentTimeEntry()">Add time entry for ticket at {{ currentTime | date: 'h:mm:ss a' }}</button>
+      <div>
+        Time Zone: {{ currentTime | date: 'zzzz' }}
+
+        <div>
+          <input type="text" #dp="bsDatepicker" bsDatepicker [(ngModel)]="bsValue" />
+          <button class="btn btn-success" (click)="dp.toggle()" [attr.aria-expanded]="dp.isOpen">Change Time Entry Date</button>
+        </div>
+
+        <div><label>Ticket Number*</label> <input placeholder="Ticket #" [(ngModel)]="ticketNumber" /></div>
+        <div><label>Comments*</label> <textarea placeholder="Comments" [(ngModel)]="comments"></textarea></div>
+      </div>
+
+      <div>
+        <button type="button" class="btn-default" (click)="addCurrentTimeEntry()">
+          Add time entry for ticket at {{ currentTime | date: 'h:mm:ss a' }}
+        </button>
+      </div>
+    </div>
+
+    <div class="col">
+      <div>
+        Start Time<timepicker></timepicker> End Time<timepicker></timepicker>
+
+        <!-- TODO: Date -->
+        <button type="button" style="margin-right: 5px;" class="btn-primary">Submit</button>
+        <button class="btn-secondary">Clear</button>
+      </div>
     </div>
   </div>
-  <div class="row">
-    <!-- TODO: Ticket search w/most recent tickets at the top.-->
-    <div class="col"><textarea placeholder="Comments"></textarea></div>
-    <div class="col-sm-4">Start Time<timepicker></timepicker></div>
-    <div class="col-sm-4">End Time<timepicker></timepicker></div>
-  </div>
-  <!-- TODO: Date -->
-  <button style="margin-right: 5px;" class="btn-primary">Submit</button> <button class="btn-secondary">Clear</button>
-
-  <div class="row" *ngFor="let timeEntry of timeEntryList">
-    <app-time-entry-list-element
-      [ticketNumber]="timeEntry.ticketNumber"
-      [date]="timeEntry.date"
-      [comments]="timeEntry.comments"
-    ></app-time-entry-list-element>
-  </div>
+  <div class="row" *ngFor="let timeEntry of timeEntryList"><app-time-entry-list-element></app-time-entry-list-element></div>
 </div>
 
 <!-- TODO: Add time-list component -->

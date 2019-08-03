@@ -1,1 +1,5 @@
-<p style="background-color: lightblue">Ticket: {{ ticketNumber }}, Date: {{ date | date: 'MMM d, y, h:mm:ss a' }}</p>
+<div [class]="getClass()">
+  Date: <input type="text" [placeholder]="ticketEntry.updateTime | date: 'MMM d, y, h:mm:ss a'" /> Ticket:
+  <input type="text" [placeholder]="ticketEntry.ticketNumber" /> Comments:
+  <input type="text" [placeholder]="ticketEntry.comments" /> In/Out: {{ ticketEntry.isStartTime ? 'In' : 'Out' }}
+</div>
