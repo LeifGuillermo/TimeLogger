@@ -21,6 +21,8 @@ export class TimeEntryComponent implements OnInit, OnDestroy {
   public comments: string;
   public todaysDate: Date = new Date();
 
+  public displayEntryToolCard = false;
+
   private timeEntryList: TicketTimeEntry[];
 
   private destroyNotify$: Subject<void> = new Subject<void>();
@@ -47,16 +49,29 @@ export class TimeEntryComponent implements OnInit, OnDestroy {
     this.destroyNotify$.complete();
   }
 
+  public openEntryToolCard() {
+    this.displayEntryToolCard = true;
+  }
+  public clearEntryToolCard() {
+    this.displayEntryToolCard = false;
+  }
+
+  public addCurrenTimeEventClicked() {
+    this.addCurrentTimeEntry();
+  }
+
   public addCurrentTimeEntry(): void {
     this.currentTime.setDate(this.bsValue.getDate());
     this.currentTime.setMonth(this.bsValue.getMonth());
     this.currentTime.setFullYear(this.bsValue.getFullYear());
     const newEntry: TicketTimeEntry = {
       ticketNumber: this.ticketNumber,
-      isStartTime: !this.timeEntryService.isCurrentlyicketStartTime(this.ticketNumber),
+      isStartTime: this.timeEntryService.isCurrentTicketStartTime(this.ticketNumber),
       updateTime: this.currentTime,
       comments: this.comments
     };
     this.timeEntryService.updateTicketState(newEntry);
   }
+
+  public activateClearAllEntries() {}
 }

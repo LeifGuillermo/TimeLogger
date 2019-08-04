@@ -11,9 +11,20 @@ import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TicketComponent } from './ticket/ticket.component';
+import { CurrentTimeEntryComponent } from './time-entry/current-time-entry/current-time-entry.component';
+import { SpecificTimeEntryComponent } from './time-entry/specific-time-entry/specific-time-entry.component';
+import { TimeLengthEntryComponent } from './time-entry/time-length-entry/time-length-entry.component';
 
 @NgModule({
-  declarations: [AppComponent, TimeEntryComponent, TimeEntryListElementComponent, TicketComponent],
+  declarations: [
+    AppComponent,
+    TimeEntryComponent,
+    TimeEntryListElementComponent,
+    TicketComponent,
+    CurrentTimeEntryComponent,
+    SpecificTimeEntryComponent,
+    TimeLengthEntryComponent
+  ],
   imports: [
     CommonModule,
     BrowserModule,

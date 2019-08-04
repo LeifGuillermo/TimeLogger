@@ -6,3 +6,5 @@ Implement client-side cacheing of data (cookies/browser-store/?)
 Time-Component
 Limit Date range (later)
 
+Filter entries by ticket search.
+(ngif ticket number like searched term then show)

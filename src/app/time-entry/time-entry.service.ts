@@ -11,8 +11,8 @@ export class TimeEntryService {
   private ticketStateLatest$: BehaviorSubject<TimeEntryTicketState | any[]> = new BehaviorSubject<TimeEntryTicketState>(null);
 
   public ticketState$: Observable<TimeEntryTicketState | any[]> = this.ticketStateReplaySubject$.asObservable();
+
   public currentTicketState$: Observable<TimeEntryTicketState | any[]> = this.ticketStateLatest$.asObservable();
-  public currentTicketNumber$: Observable<string> = this.currentTicketBehaviorSubject$.asObservable();
 
   // The current ticket is the ticket that has its number in the Ticket Number field.
   public currentTicket: TicketTimeEntry;
@@ -23,8 +23,13 @@ export class TimeEntryService {
     this.currentTicketBehaviorSubject$.next(ticketNumber);
   }
 
-  public isCurrentlyicketStartTime(ticketNumber: string): boolean {
-    if (this.ticketStateLatest$.value && !this.ticketStateLatest$.value[ticketNumber]) {
+  public getCurrentTicketNumber(): string {
+    return this.currentTicketBehaviorSubject$.value;
+  }
+
+  public isCurrentTicketStartTime(ticketNumber: string): boolean {
+    if (this.ticketStateLatest$.value && this.ticketStateLatest$.value[ticketNumber]) {
+      console.log(this.ticketStateLatest$.value);
       return this.ticketStateLatest$.value[ticketNumber].isStartTime;
     }
     return false;
@@ -37,6 +42,7 @@ export class TimeEntryService {
   public updateTicketState(ticket: TicketTimeEntry): void {
     if (ticket && ticket.ticketNumber) {
       this.currentTicket = ticket;
+      ticket.isStartTime = !ticket.isStartTime;
       const updatedState = this.ticketStateLatest$ && this.ticketStateLatest$.value ? this.ticketStateLatest$.value : [];
       updatedState[ticket.ticketNumber] = ticket;
       this.ticketStateReplaySubject$.next(updatedState);
@@ -54,5 +60,6 @@ export interface TicketTimeEntry {
   ticketNumber: string;
   isStartTime: boolean;
   updateTime: Date;
+  timeLengthMinutes?: number;
   comments?: string;
 }

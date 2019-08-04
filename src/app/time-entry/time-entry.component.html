@@ -2,36 +2,62 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <div>
-        Time Zone: {{ currentTime | date: 'zzzz' }}
+      <div class="row">
+        <div class="col"><input type="text" #dp="bsDatepicker" bsDatepicker [(ngModel)]="bsValue" /></div>
+        <div class="col">Time Zone: {{ currentTime | date: 'zzzz' }}</div>
+      </div>
 
-        <div>
-          <input type="text" #dp="bsDatepicker" bsDatepicker [(ngModel)]="bsValue" />
-          <button class="btn btn-success" (click)="dp.toggle()" [attr.aria-expanded]="dp.isOpen">Change Time Entry Date</button>
+      <div class="row" style="margin-bottom: 10px;"></div>
+      <div class="row" style="margin-bottom: 10px;">
+        <div class="col" style="vertical-align: middle">
+          <input style="vertical-align: middle" placeholder="Ticket #" [(ngModel)]="ticketNumber" />
         </div>
-
-        <div><label>Ticket Number*</label> <input placeholder="Ticket #" [(ngModel)]="ticketNumber" /></div>
-        <div><label>Comments*</label> <textarea placeholder="Comments" [(ngModel)]="comments"></textarea></div>
-      </div>
-
-      <div>
-        <button type="button" class="btn-default" (click)="addCurrentTimeEntry()">
-          Add time entry for ticket at {{ currentTime | date: 'h:mm:ss a' }}
-        </button>
-      </div>
-    </div>
-
-    <div class="col">
-      <div>
-        Start Time<timepicker></timepicker> End Time<timepicker></timepicker>
-
-        <!-- TODO: Date -->
-        <button type="button" style="margin-right: 5px;" class="btn-primary">Submit</button>
-        <button class="btn-secondary">Clear</button>
+        <div class="col" style="vertical-align: middle">
+          <textarea
+            style="vertical-align: middle; margin-bottom: 10px;"
+            placeholder="Comments"
+            [(ngModel)]="comments"
+          ></textarea>
+        </div>
       </div>
     </div>
   </div>
-  <div class="row" *ngFor="let timeEntry of timeEntryList"><app-time-entry-list-element></app-time-entry-list-element></div>
+
+  <ul class="nav mb-3">
+    <li class="nav-item">
+      <a class="nav-link">
+        <button class="clearEntriesButton" type="button" (click)="activateClearAllEntries()">Clear all time entries</button>
+      </a>
+    </li>
+    <li>
+      <a class="nav-link" [routerLink]="['/time-entry']" (click)="clearEntryToolCard()">
+        <app-current-time-entry
+          [currentTime]="currentTime"
+          (addCurrentTimeEvent)="addCurrenTimeEventClicked()"
+        ></app-current-time-entry>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="manual" routerLinkActive="router-link-active" (click)="openEntryToolCard()"
+        >Manual Time-Span Entry</a
+      >
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="time-length" routerLinkActive="router-link-active" (click)="openEntryToolCard()"
+        >Time Start and Length Entry</a
+      >
+    </li>
+  </ul>
+
+  <div class="card" *ngIf="displayEntryToolCard">
+    <div class="card-body"><router-outlet></router-outlet></div>
+  </div>
+
+  <div class="card" *ngIf="timeEntryList && timeEntryList.length > 0">
+    <div class="card-body">
+      <div class="row" *ngFor="let timeEntry of timeEntryList"><app-time-entry-list-element></app-time-entry-list-element></div>
+    </div>
+  </div>
 </div>
 
 <!-- TODO: Add time-list component -->

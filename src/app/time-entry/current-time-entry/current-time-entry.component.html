@@ -1,0 +1,5 @@
+<div>
+  <button type="button" class="addCurrentTimeButton" (click)="addCurrentTimeEvent.emit()">
+    Add time entry for ticket at {{ currentTime | date: 'h:mm:ss a' }}
+  </button>
+</div>
