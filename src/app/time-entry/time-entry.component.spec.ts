@@ -1,6 +1,8 @@
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TimeEntryComponent } from './time-entry.component';
+import { NgModule } from '@angular/core';
 
 describe('TimeEntryComponent', () => {
   let component: TimeEntryComponent;
@@ -8,9 +10,9 @@ describe('TimeEntryComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TimeEntryComponent ]
-    })
-    .compileComponents();
+      declarations: [TimeEntryComponent],
+      imports: [BsDatepickerModule]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

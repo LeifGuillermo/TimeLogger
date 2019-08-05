@@ -12,7 +12,7 @@ export class TimeEntryListElementComponent implements OnInit {
   constructor(private timeEntryService: TimeEntryService) {}
 
   public getClass(): string {
-    return this.ticketEntry.isStartTime ? 'ticketStartTime' : 'ticketEndTime';
+    return this.ticketEntry && this.ticketEntry.isStartTime ? 'ticketStartTime' : 'ticketEndTime';
   }
 
   ngOnInit() {

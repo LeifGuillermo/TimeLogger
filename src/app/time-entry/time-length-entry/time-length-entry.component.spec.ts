@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TimeLengthEntryComponent } from './time-length-entry.component';
+import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 
 describe('TimeLengthEntryComponent', () => {
   let component: TimeLengthEntryComponent;
@@ -8,9 +9,9 @@ describe('TimeLengthEntryComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TimeLengthEntryComponent ]
-    })
-    .compileComponents();
+      declarations: [TimeLengthEntryComponent],
+      imports: [TimepickerModule]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
