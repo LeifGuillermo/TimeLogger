@@ -8,3 +8,5 @@ Limit Date range (later)
 
 Filter entries by ticket search.
 (ngif ticket number like searched term then show)
+
+Show a recording symbol or something when a ticket is clocked-in but not clocked-out.
