@@ -13,5 +13,4 @@ export class CurrentTimeEntryComponent implements OnInit {
 
   ngOnInit() {}
 
-  public addCurrentTimeEntryClicked(): void {}
 }

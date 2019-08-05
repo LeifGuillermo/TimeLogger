@@ -3,6 +3,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { TimeEntryService, TicketTimeEntry, TimeEntryTicketState } from './time-entry.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-time-entry',
@@ -27,7 +28,13 @@ export class TimeEntryComponent implements OnInit, OnDestroy {
 
   private destroyNotify$: Subject<void> = new Subject<void>();
 
-  constructor(private clockService: ClockService, private timeEntryService: TimeEntryService) {
+  private currentRoute: string;
+
+  constructor(
+    private clockService: ClockService,
+    private timeEntryService: TimeEntryService,
+    private activatedRoute: ActivatedRoute
+  ) {
     this.timeEntryList = [];
   }
 
@@ -42,6 +49,9 @@ export class TimeEntryComponent implements OnInit, OnDestroy {
           this.timeEntryList.push(updatedTicketState[this.ticketNumber]);
         }
       });
+
+    //TODO: Currently getting route and determining whether to open/close the tool card if a link is clicked.
+    console.log(this.activatedRoute.snapshot.toString());
   }
 
   ngOnDestroy() {
@@ -49,7 +59,8 @@ export class TimeEntryComponent implements OnInit, OnDestroy {
     this.destroyNotify$.complete();
   }
 
-  public openEntryToolCard() {
+  public toolcardLinkClicked() {
+    // this.activatedRoute.
     this.displayEntryToolCard = true;
   }
   public clearEntryToolCard() {

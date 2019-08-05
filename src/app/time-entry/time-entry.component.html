@@ -30,7 +30,7 @@
       </a>
     </li>
     <li>
-      <a class="nav-link" [routerLink]="['/time-entry']" (click)="clearEntryToolCard()">
+      <a class="nav-link" [routerLink]="['/time-entry']" (click)="clearEntryToolCard()" tabindex="-1">
         <app-current-time-entry
           [currentTime]="currentTime"
           (addCurrentTimeEvent)="addCurrenTimeEventClicked()"
@@ -38,12 +38,12 @@
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" routerLink="manual" routerLinkActive="router-link-active" (click)="openEntryToolCard()"
+      <a class="nav-link" routerLink="manual" routerLinkActive="router-link-active" (click)="toolcardLinkClicked()"
         >Manual Time-Span Entry</a
       >
     </li>
     <li class="nav-item">
-      <a class="nav-link" routerLink="time-length" routerLinkActive="router-link-active" (click)="openEntryToolCard()"
+      <a class="nav-link" routerLink="time-length" routerLinkActive="router-link-active" (click)="toolcardLinkClicked()"
         >Time Start and Length Entry</a
       >
     </li>
