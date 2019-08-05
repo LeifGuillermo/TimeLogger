@@ -1,5 +1,5 @@
 <div [class]="getClass()">
-  {{ ticketEntry.isStartTime ? 'In' : 'Out' }}
+  {{ ticketEntry && ticketEntry.isStartTime ? 'In' : 'Out' }}
   <input type="text" [placeholder]="ticketEntry.updateTime | date: 'MMM d, y, h:mm:ss a'" /> Ticket:
   <input type="text" [placeholder]="ticketEntry.ticketNumber" /> Comments:
   <input type="text" [placeholder]="ticketEntry.comments" />
